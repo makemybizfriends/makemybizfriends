@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,6 +14,11 @@ export default function Home() {
     "Automotive Parts",
     "Food Products"
   ];
+
+  // Helper function to convert category name to URL-friendly format
+  const getCategoryUrl = (categoryName: string) => {
+    return `/category/${categoryName.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`;
+  };
 
   return (
     <div className="min-h-screen">
@@ -99,33 +103,37 @@ export default function Home() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {mockCategories.map((category) => (
-                <Card key={category.id} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg cursor-pointer">
-                  <CardContent className="p-0">
-                    <div className="aspect-video rounded-t-lg overflow-hidden">
-                      <img 
-                        src={category.image} 
-                        alt={category.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-semibold text-foreground mb-2">{category.name}</h3>
-                      <p className="text-muted-foreground text-sm mb-3">{category.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-primary font-medium text-sm">
-                          {category.productCount.toLocaleString()} products
-                        </span>
-                        <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
+                <Link key={category.id} to={getCategoryUrl(category.name)}>
+                  <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg cursor-pointer h-full">
+                    <CardContent className="p-0">
+                      <div className="aspect-video rounded-t-lg overflow-hidden">
+                        <img 
+                          src={category.image} 
+                          alt={category.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                      <div className="p-6">
+                        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                          {category.name}
+                        </h3>
+                        <p className="text-muted-foreground text-sm mb-3">{category.description}</p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-primary font-medium text-sm">
+                            {category.productCount.toLocaleString()} products
+                          </span>
+                          <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
             
             <div className="text-center mt-8">
               <Button asChild variant="outline" size="lg">
-                <Link to="/products">
+                <Link to="/directory">
                   View All Products
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
