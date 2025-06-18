@@ -190,22 +190,42 @@ export default function ProductListing() {
             
             {/* Enhanced Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              {[
-                { icon: Users, number: "10K+", label: "Verified Suppliers", color: "text-blue-300" },
-                { icon: Package, number: "50K+", label: "Quality Products", color: "text-green-300" },
-                { icon: Award, number: "99.8%", label: "Success Rate", color: "text-yellow-300" },
-                { icon: TrendingUp, number: "24/7", label: "Support", color: "text-pink-300" }
-              ].map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="flex justify-center mb-3">
-                    <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <stat.icon className={`h-6 w-6 ${stat.color}`} />
-                    </div>
+              <div className="text-center group">
+                <div className="flex justify-center mb-3">
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Users className="h-6 w-6 text-blue-300" />
                   </div>
-                  <div className="text-2xl font-bold text-white mb-1">{stat.number}</div>
-                  <div className="text-sm text-white/80">{stat.label}</div>
                 </div>
-              ))}
+                <div className="text-2xl font-bold text-white mb-1">10K+</div>
+                <div className="text-sm text-white/80">Verified Suppliers</div>
+              </div>
+              <div className="text-center group">
+                <div className="flex justify-center mb-3">
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Package className="h-6 w-6 text-green-300" />
+                  </div>
+                </div>
+                <div className="text-2xl font-bold text-white mb-1">50K+</div>
+                <div className="text-sm text-white/80">Quality Products</div>
+              </div>
+              <div className="text-center group">
+                <div className="flex justify-center mb-3">
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Award className="h-6 w-6 text-yellow-300" />
+                  </div>
+                </div>
+                <div className="text-2xl font-bold text-white mb-1">99.8%</div>
+                <div className="text-sm text-white/80">Success Rate</div>
+              </div>
+              <div className="text-center group">
+                <div className="flex justify-center mb-3">
+                  <div className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUp className="h-6 w-6 text-pink-300" />
+                  </div>
+                </div>
+                <div className="text-2xl font-bold text-white mb-1">24/7</div>
+                <div className="text-sm text-white/80">Support</div>
+              </div>
             </div>
           </div>
         </div>
