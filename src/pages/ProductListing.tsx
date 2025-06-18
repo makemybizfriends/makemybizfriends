@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -32,14 +31,12 @@ const priceRanges = [
   { label: "Above ₹4,00,000", min: 400000, max: Infinity },
 ];
 
-const countries = ["India", "USA", "China", "Germany", "Japan", "South Korea"];
 const ratings = [5, 4, 3, 2, 1];
 
 export default function ProductListing() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
-  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
   const [inStockOnly, setInStockOnly] = useState(false);
   const [verifiedOnly, setVerifiedOnly] = useState(false);
@@ -75,11 +72,6 @@ export default function ProductListing() {
         if (!matchesPriceRange) return false;
       }
 
-      // Countries
-      if (selectedCountries.length > 0 && !selectedCountries.includes(product.vendor.location)) {
-        return false;
-      }
-
       // Ratings - Fixed TypeScript error by ensuring rating is a number
       if (selectedRatings.length > 0) {
         const vendorRating = typeof product.vendor.rating === 'number' ? product.vendor.rating : 0;
@@ -100,7 +92,7 @@ export default function ProductListing() {
 
       return true;
     });
-  }, [searchTerm, selectedCategories, selectedPriceRanges, selectedCountries, selectedRatings, inStockOnly, verifiedOnly]);
+  }, [searchTerm, selectedCategories, selectedPriceRanges, selectedRatings, inStockOnly, verifiedOnly]);
 
   // Sort products
   const sortedProducts = useMemo(() => {
@@ -143,14 +135,6 @@ export default function ProductListing() {
     );
   };
 
-  const handleCountryToggle = (country: string) => {
-    setSelectedCountries(prev => 
-      prev.includes(country) 
-        ? prev.filter(c => c !== country)
-        : [...prev, country]
-    );
-  };
-
   const handleRatingToggle = (rating: number) => {
     setSelectedRatings(prev => 
       prev.includes(rating) 
@@ -163,7 +147,6 @@ export default function ProductListing() {
     setSearchTerm("");
     setSelectedCategories([]);
     setSelectedPriceRanges([]);
-    setSelectedCountries([]);
     setSelectedRatings([]);
     setInStockOnly(false);
     setVerifiedOnly(false);
@@ -267,30 +250,6 @@ export default function ProductListing() {
                   </CollapsibleContent>
                 </Collapsible>
 
-                {/* Country/Origin */}
-                <Collapsible defaultOpen className="mb-6">
-                  <CollapsibleTrigger className="flex items-center justify-between w-full text-left">
-                    <h4 className="font-medium text-orange-700">Origin Country</h4>
-                    <ChevronDown className="h-4 w-4 text-orange-600" />
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="mt-3 space-y-2">
-                    {countries.map((country) => (
-                      <div key={country} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`country-${country}`}
-                          checked={selectedCountries.includes(country)}
-                          onCheckedChange={() => handleCountryToggle(country)}
-                          className="border-orange-300 data-[state=checked]:bg-orange-600"
-                        />
-                        <label htmlFor={`country-${country}`} className="text-sm text-gray-700 flex items-center">
-                          {country}
-                          {country === 'India' && <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Make in India</span>}
-                        </label>
-                      </div>
-                    ))}
-                  </CollapsibleContent>
-                </Collapsible>
-
                 {/* Supplier Rating */}
                 <Collapsible defaultOpen className="mb-6">
                   <CollapsibleTrigger className="flex items-center justify-between w-full text-left">
@@ -353,7 +312,7 @@ export default function ProductListing() {
                 <p className="text-muted-foreground font-medium">
                   <span className="text-orange-600 font-bold">{sortedProducts.length}</span> products found
                 </p>
-                {(selectedCategories.length > 0 || selectedPriceRanges.length > 0 || selectedCountries.length > 0) && (
+                {(selectedCategories.length > 0 || selectedPriceRanges.length > 0) && (
                   <div className="flex flex-wrap gap-2">
                     {selectedCategories.map(category => (
                       <Badge key={category} variant="secondary" className="cursor-pointer bg-orange-100 text-orange-700 hover:bg-orange-200" 
@@ -365,12 +324,6 @@ export default function ProductListing() {
                       <Badge key={range} variant="secondary" className="cursor-pointer bg-green-100 text-green-700 hover:bg-green-200"
                              onClick={() => handlePriceRangeToggle(range)}>
                         {range} ×
-                      </Badge>
-                    ))}
-                    {selectedCountries.map(country => (
-                      <Badge key={country} variant="secondary" className="cursor-pointer bg-blue-100 text-blue-700 hover:bg-blue-200"
-                             onClick={() => handleCountryToggle(country)}>
-                        {country} ×
                       </Badge>
                     ))}
                   </div>
