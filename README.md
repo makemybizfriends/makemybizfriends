@@ -1,4 +1,6 @@
-# Welcome to your Lovable project
+# Make My Biz Friends
+
+A business networking and B2B marketplace application built with React, TypeScript, and modern web technologies.
 
 ## Project info
 
@@ -24,10 +26,10 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+git clone https://github.com/makemybizfriends/makemybizfriends.git
 
 # Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+cd makemybizfriends
 
 # Step 3: Install the necessary dependencies.
 npm i
