@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +9,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductListing from "./pages/ProductListing";
 import ProductDetail from "./pages/ProductDetail";
+import CategoryFilter from "./pages/CategoryFilter";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
@@ -38,6 +38,7 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/directory" element={<ProductListing />} />
+              <Route path="/category/:categoryName" element={<CategoryFilter />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
