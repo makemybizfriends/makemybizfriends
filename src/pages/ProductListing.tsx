@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { mockProducts, mockCategories } from "@/data/mockData";
+import { cn } from "@/lib/utils";
 
 const priceRanges = [
   { label: "Under ₹8,000", min: 0, max: 8000 },
@@ -467,7 +468,12 @@ export default function ProductListing() {
                     variant={viewMode === 'grid' ? 'default' : 'ghost'} 
                     size="sm"
                     onClick={() => setViewMode('grid')}
-                    className={`rounded-l-xl ${viewMode === 'grid' ? 'bg-orange-600 hover:bg-orange-700 text-white' : 'hover:bg-orange-50'}`}
+                    className={cn(
+                      "rounded-l-xl",
+                      viewMode === 'grid' 
+                        ? "bg-orange-600 hover:bg-orange-700 text-white" 
+                        : "hover:bg-orange-50"
+                    )}
                   >
                     <Grid3X3 className="h-4 w-4" />
                   </Button>
@@ -475,7 +481,12 @@ export default function ProductListing() {
                     variant={viewMode === 'list' ? 'default' : 'ghost'} 
                     size="sm"
                     onClick={() => setViewMode('list')}
-                    className={`rounded-r-xl ${viewMode === 'list' ? 'bg-orange-600 hover:bg-orange-700 text-white' : 'hover:bg-orange-50'}`}
+                    className={cn(
+                      "rounded-r-xl",
+                      viewMode === 'list' 
+                        ? "bg-orange-600 hover:bg-orange-700 text-white" 
+                        : "hover:bg-orange-50"
+                    )}
                   >
                     <List className="h-4 w-4" />
                   </Button>
